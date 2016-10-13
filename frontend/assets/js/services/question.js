@@ -15,7 +15,7 @@
                     data: [
                         {
                             id: 3,
-                            title: "Informe o seu nome",
+                            title: "Informe o seu iohann",
                             label: "Nome",
                             field: {
                                 type: "text",
@@ -37,10 +37,9 @@
                             field: {
                                 type: "number"
                             },
-                            showOnly: {
-                                id: 1,
-                                equals: "dev"
-                            }
+                            showOnly: [
+                                parent: 1
+                            ]
                         }
                     ]
                 });

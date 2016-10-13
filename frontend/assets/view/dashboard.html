@@ -7,20 +7,21 @@
             <form name="formName">
                 <div class="form-horizontal">
                     <div class="form-group" ng-hide="field.showOnly" ng-repeat="question in vm.questions">
-                        <label for="field{{ question.id }}" class="col-sm-2 control-label">{{ question.label }}:</label>
-                        <div class="col-sm-10">
-                            <input
-                                type="{{ question.field.type }}"
-                                class="form-control"
-                                id="field{{ question.id }}"
-                                name="field{{ question.id }}"
-                                placeholder="{{ question.title }}"
-                                ng-show="!question.showOnly || question.showOnly.equals == vm[question.showOnly.id]"
-                                ng-model="vm[question.id]"
-                                ng-required="question.field.required"
-                            >
-                            <div class="validation-message" ng-messages="formName['field' + question.id].$error">
-                                <div ng-message="required" class="help-block">Campo obrigatório.</div>
+                        <div ng-show="!question.showOnly || question.showOnly.equals == vm[question.showOnly.id]">
+                            <label for="field{{ question.id }}" class="col-sm-2 control-label">{{ question.label }}:</label>
+                            <div class="col-sm-10">
+                                <input
+                                    type="{{ question.field.type }}"
+                                    class="form-control"
+                                    id="field{{ question.id }}"
+                                    name="field{{ question.id }}"
+                                    placeholder="{{ question.title }}"
+                                    ng-model="vm[question.id]"
+                                    ng-required="question.field.required"
+                                >
+                                <div class="validation-message" ng-messages="formName['field' + question.id].$error">
+                                    <div ng-message="required" class="help-block">Campo obrigatório.</div>
+                                </div>
                             </div>
                         </div>
                     </div>

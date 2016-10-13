@@ -36,12 +36,12 @@ module.exports = function(grunt) {
                     '<%= dist_path %><%= css_relative_path %>app.css': '<%= frontend_path %><%= less_relative_path %>style.less'
                 }
             },
-            development: {
+            production: {
                 options: {
                     compress: true
                 },
                 files: {
-                    '<%= dist_path %><%= css_relative_path %>app.css': '<%= frontend_path %><%= less_relative_path %>style.less'
+                    '<%= dist_path %><%= css_relative_path %>app.min.css': '<%= frontend_path %><%= less_relative_path %>style.less'
                 }
             },
         },

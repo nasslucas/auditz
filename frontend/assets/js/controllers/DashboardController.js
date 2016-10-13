@@ -8,7 +8,7 @@
     /* @ngInject */
     function DashboardController(question) {
         var vm = this;
-        vm.title = 'Dashboard';
+        vm.title = 'Hello2';
 
         question.all().then(function (response) {
             vm.questions = response.data;
