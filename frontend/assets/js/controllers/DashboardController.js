@@ -8,10 +8,24 @@
     /* @ngInject */
     function DashboardController(question) {
         var vm = this;
-        vm.title = 'Hello2';
+        vm.title = 'Dashboard';
 
         question.all().then(function (response) {
-            vm.questions = response.data;
+            var questions = response.data;
+
+            questions.sort(function (current, next) {
+                if (current.id > next.id) {
+                    return 1;
+                }
+
+                if (current.id < next.id) {
+                    return -1;
+                }
+
+                return 0;
+            });
+
+            vm.questions = questions;
         });
     }
 

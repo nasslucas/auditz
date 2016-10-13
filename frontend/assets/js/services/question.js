@@ -14,32 +14,44 @@
                 deferred.resolve({
                     data: [
                         {
-                            id: 3,
-                            title: "Informe o seu iohann",
-                            label: "Nome",
-                            field: {
-                                type: "text",
-                                required: true
-                            }
-                        },
-                        {
                             id: 1,
-                            title: "Informe o seu cargo",
-                            label: "Cargo",
-                            field: {
-                                type: "text"
+                            label: "First label",
+                            required: true,
+                            child: {
+                                id: 3,
+                                label: "Third label (parent #1)",
+                                required: false
                             }
                         },
                         {
                             id: 2,
-                            title: "Uau, queremos contratar você, peça um salário que iremos pagar!",
-                            label: "Salário",
-                            field: {
-                                type: "number"
-                            },
-                            showOnly: [
-                                parent: 1
-                            ]
+                            label: "Second label",
+                            required: false
+                        }
+                    ]
+                });
+
+                return deferred.promise;
+            },
+            lastAuditee: function (auditeeId) {
+                var deferred = $q.defer();
+
+                deferred.resolve({
+                    data: [
+                        {
+                            id: 1,
+                            label: "First label",
+                            value: 6,
+                            child: {
+                                id: 3,
+                                label: "Third label (parent #1)",
+                                value: 3
+                            }
+                        },
+                        {
+                            id: 2,
+                            label: "Second label",
+                            value: 5
                         }
                     ]
                 });

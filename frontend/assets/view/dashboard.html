@@ -6,24 +6,53 @@
         <div class="user-info">
             <form name="formName">
                 <div class="form-horizontal">
-                    <div class="form-group" ng-hide="field.showOnly" ng-repeat="question in vm.questions">
-                        <div ng-show="!question.showOnly || question.showOnly.equals == vm[question.showOnly.id]">
+                    <div ng-repeat="question in vm.questions">
+                        <div class="form-group">
                             <label for="field{{ question.id }}" class="col-sm-2 control-label">{{ question.label }}:</label>
                             <div class="col-sm-10">
                                 <input
-                                    type="{{ question.field.type }}"
+                                    type="range"
                                     class="form-control"
                                     id="field{{ question.id }}"
                                     name="field{{ question.id }}"
-                                    placeholder="{{ question.title }}"
+                                    min="0"
+                                    max="10"
+                                    step="1"
+                                    value="0"
+                                    ng-init="vm[question.id] = 0"
                                     ng-model="vm[question.id]"
-                                    ng-required="question.field.required"
+                                    ng-required="question.required"
                                 >
+                                value: {{ vm[question.id] }}
                                 <div class="validation-message" ng-messages="formName['field' + question.id].$error">
                                     <div ng-message="required" class="help-block">Campo obrigatório.</div>
                                 </div>
                             </div>
                         </div>
+
+                        <div class="form-group" ng-show="question.child && vm[question.id] >= 1">
+                            <label for="field{{ question.child.id }}" class="col-sm-2 control-label">{{ question.child.label }}:</label>
+                            <div class="col-sm-10">
+                                <input
+                                    type="range"
+                                    class="form-control"
+                                    id="fieldChild{{ question.child.id }}"
+                                    name="fieldChild{{ question.child.id }}"
+                                    min="0"
+                                    max="10"
+                                    step="1"
+                                    value="0"
+                                    ng-init="vm[question.child.id] = 0"
+                                    ng-model="vm[question.child.id]"
+                                    ng-required="question.child.required"
+                                >
+                                value: {{ vm[question.child.id] }}
+                                <div class="validation-message" ng-messages="formName['fieldChild' + question.child.id].$error">
+                                    <div ng-message="required" class="help-block">Campo obrigatório.</div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary pull-right">Salvar</button>
