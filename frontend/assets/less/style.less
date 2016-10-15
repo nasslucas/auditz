@@ -149,3 +149,37 @@
 #ng-view {
     margin-top: 80px;
 }
+
+.panel {
+    .panel-body {
+        padding: 20px 40px;
+    }
+
+    .panel-footer {
+        padding: 10px 40px;
+    }
+}
+
+.nav-tabs {
+    margin-bottom: 30px;
+}
+
+.rzslider {
+    .rz-pointer {
+        outline: none;
+        background-color: @colorPrimary;
+
+        &:after,
+        &.rz-active:after {
+            background-color: @colorWhite;
+        }
+    }
+
+    .rz-tick {
+        .rz-tick-value {
+            top: 20px;
+            color: @colorSecondaryText;
+            font-weight: 700;
+        }
+    }
+}

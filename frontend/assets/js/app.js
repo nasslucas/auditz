@@ -5,7 +5,8 @@
         'ngRoute',
         'ngStorage',
         'ngMessages',
-        'ngToast'
+        'ngToast',
+        'rzModule'
     ]);
 
 })();

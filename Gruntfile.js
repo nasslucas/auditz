@@ -61,6 +61,7 @@ module.exports = function(grunt) {
                     '<%= bower_path %>/sweetalert/dist/sweetalert.css',
                     '<%= bower_path %>/ngToast/dist/ngToast.min.css',
                     '<%= bower_path %>/ngToast/dist/ngToast-animations.min.css',
+                    '<%= bower_path %>/angularjs-slider/dist/rzslider.min.css',
                 ],
                 dest: '<%= dist_path %>/<%= css_relative_path %>/vendor.css'
             },
@@ -73,6 +74,7 @@ module.exports = function(grunt) {
                     '<%= bower_path %>/ngstorage/ngStorage.min.js',
                     '<%= bower_path %>/ngToast/dist/ngToast.min.js',
                     '<%= bower_path %>/sweetalert/dist/sweetalert-dev.js',
+                    '<%= bower_path %>/angularjs-slider/dist/rzslider.min.js',
                 ],
                 dest: '<%= dist_path %>/<%= js_relative_path %>/vendor.js'
             },
@@ -192,6 +194,7 @@ module.exports = function(grunt) {
                             'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css',
                             'https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css',
                             'https://cdnjs.cloudflare.com/ajax/libs/chosen/1.6.2/chosen.min.css',
+                            'https://cdnjs.cloudflare.com/ajax/libs/angularjs-slider/5.5.1/rzslider.min.css',
                             '<%= css_relative_path %>app.min.css'
                         ],
                         javascripts: [
@@ -199,6 +202,7 @@ module.exports = function(grunt) {
                             'https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular-route.min.js',
                             'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js',
                             'https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js',
+                            'https://cdnjs.cloudflare.com/ajax/libs/angularjs-slider/5.5.1/rzslider.min.js',
                             '<%= js_relative_path %>app.min.js'
                         ]
                     }
