@@ -62,11 +62,13 @@ module.exports = function(grunt) {
                     '<%= bower_path %>/ngToast/dist/ngToast.min.css',
                     '<%= bower_path %>/ngToast/dist/ngToast-animations.min.css',
                     '<%= bower_path %>/angularjs-slider/dist/rzslider.min.css',
+                    '<%= bower_path %>/chosen/chosen.css',
                 ],
                 dest: '<%= dist_path %>/<%= css_relative_path %>/vendor.css'
             },
             development_vendor_js: {
                 src: [
+                    '<%= bower_path %>/jquery/dist/jquery.min.js',
                     '<%= bower_path %>/angular/angular.js',
                     '<%= bower_path %>/angular-route/angular-route.js',
                     '<%= bower_path %>/angular-messages/angular-messages.js',
@@ -75,6 +77,8 @@ module.exports = function(grunt) {
                     '<%= bower_path %>/ngToast/dist/ngToast.min.js',
                     '<%= bower_path %>/sweetalert/dist/sweetalert-dev.js',
                     '<%= bower_path %>/angularjs-slider/dist/rzslider.min.js',
+                    '<%= bower_path %>/chosen/chosen.jquery.js',
+                    '<%= bower_path %>/angular-chosen-localytics/dist/angular-chosen.min.js',
                 ],
                 dest: '<%= dist_path %>/<%= js_relative_path %>/vendor.js'
             },

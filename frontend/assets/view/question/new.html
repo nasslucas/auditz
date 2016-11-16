@@ -3,11 +3,15 @@
 		<h1>{{ vm.title }}</h1>
 	</div>
     <div class="col-md-12">
-        <ul class="nav nav-tabs">
-            <li ng-class="{'active': vm.dimension.id == dimension.id}" ng-repeat="dimension in vm.dimensions"><a ng-click="vm.changeDimension(dimension)">{{ dimension.name }}</a></li>
+        <ul class="nav nav-tabs" ng-init="vm.dimension = 1">
+            <li ng-class="{'active': vm.dimension == 1}"><a ng-click="vm.dimension = 1">Dimension 1</a></li>
+            <li ng-class="{'active': vm.dimension == 2}"><a ng-click="vm.dimension = 2">Dimension 2</a></li>
+            <li ng-class="{'active': vm.dimension == 3}"><a ng-click="vm.dimension = 3">Dimension 3</a></li>
+            <li ng-class="{'active': vm.dimension == 4}"><a ng-click="vm.dimension = 4">Dimension 4</a></li>
+            <li ng-class="{'active': vm.dimension == 5}"><a ng-click="vm.dimension = 5">Dimension 5</a></li>
         </ul>
         <form name="formName">
-            <div ng-repeat="question in vm.questions | filter:{dimension: vm.dimension.id}">
+            <div ng-repeat="question in vm.questions | filter:{dimension: vm.dimension}">
                 <div class="form-group col-md-6">
                     <div class="panel panel-default">
                         <div class="panel-heading">
@@ -15,6 +19,7 @@
                         </div>
                         <div class="panel-body">
                             <rzslider
+                                ng-init="vm[question.id] = 0"
                                 rz-slider-model="vm[question.id]"
                             ></rzslider>
                         </div>
@@ -36,7 +41,7 @@
                 </div>
             </div>
 
-            <div class="col-md-12" ng-show="vm.dimension.id == dimension.id" ng-repeat="dimension in vm.dimensions">
+            <div class="col-md-12">
                 <div class="panel panel-danger">
                     <div class="panel-heading">
                         <label class="panel-title">Comentários</label>

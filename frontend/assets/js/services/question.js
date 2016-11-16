@@ -16,7 +16,7 @@
                         {
                             id: 1,
                             dimension: 1,
-                            label: "Mussum Ipsum, cacilds vidis litro abertis.",
+                            label: "Dimensão[1] - Mussum Ipsum, cacilds vidis litro abertis.",
                             child: {
                                 id: 15,
                                 label: "Delegadis gente finis, bibendum egestas augue arcu ut est.",
@@ -25,27 +25,27 @@
                         {
                             id: 2,
                             dimension: 2,
-                            label: "Sapien in monti palavris qui num significa nadis i pareci latim.",
+                            label: "Dimensão[2] - Sapien in monti palavris qui num significa nadis i pareci latim.",
                         },
                         {
                             id: 3,
                             dimension: 3,
-                            label: "Nec orci ornare consequat.",
+                            label: "Dimensão[3] - Nec orci ornare consequat.",
                         },
                         {
                             id: 4,
                             dimension: 4,
-                            label: "Praesent lacinia ultrices consectetur.",
+                            label: "Dimensão[4] - Praesent lacinia ultrices consectetur.",
                         },
                         {
                             id: 5,
                             dimension: 5,
-                            label: "Sed non ipsum felis. Vehicula non.",
+                            label: "Dimensão[5] - Sed non ipsum felis. Vehicula non.",
                         },
                         {
                             id: 6,
                             dimension: 1,
-                            label: "Vivamus sit amet nibh non tellus tristique interdum.",
+                            label: "Dimensão[1] - Vivamus sit amet nibh non tellus tristique interdum.",
                         }
                     ]
                 });

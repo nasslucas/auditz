@@ -6,7 +6,8 @@
         'ngStorage',
         'ngMessages',
         'ngToast',
-        'rzModule'
+        'rzModule',
+        'localytics.directives'
     ]);
 
 })();
