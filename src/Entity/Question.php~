@@ -1,0 +1,67 @@
+<?php
+
+namespace Cekurte\Audit\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Question
+ *
+ * @ORM\Table(name="question", uniqueConstraints={@ORM\UniqueConstraint(name="id_UNIQUE", columns={"id"})}, indexes={@ORM\Index(name="fk_question_question_idx", columns={"question_id"}), @ORM\Index(name="fk_question_dimension1_idx", columns={"dimension_id"})})
+ * @ORM\Entity
+ */
+class Question
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=255, nullable=false)
+     */
+    private $name;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="string", length=255, nullable=true)
+     */
+    private $description;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="archived", type="boolean", nullable=false)
+     */
+    private $archived;
+
+    /**
+     * @var \Dimension
+     *
+     * @ORM\ManyToOne(targetEntity="Dimension")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="dimension_id", referencedColumnName="id")
+     * })
+     */
+    private $dimension;
+
+    /**
+     * @var \Question
+     *
+     * @ORM\ManyToOne(targetEntity="Question")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="question_id", referencedColumnName="id")
+     * })
+     */
+    private $question;
+
+
+}
+

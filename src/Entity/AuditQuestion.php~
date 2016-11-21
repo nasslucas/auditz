@@ -1,0 +1,60 @@
+<?php
+
+namespace Cekurte\Audit\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * AuditQuestion
+ *
+ * @ORM\Table(name="audit_question", uniqueConstraints={@ORM\UniqueConstraint(name="id_UNIQUE", columns={"id"})}, indexes={@ORM\Index(name="fk_audit_question_audit1_idx", columns={"audit_id"}), @ORM\Index(name="fk_audit_question_question1_idx", columns={"question_id"})})
+ * @ORM\Entity
+ */
+class AuditQuestion
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="weight", type="decimal", precision=10, scale=0, nullable=false)
+     */
+    private $weight;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="answer", type="integer", nullable=true)
+     */
+    private $answer;
+
+    /**
+     * @var \Audit
+     *
+     * @ORM\ManyToOne(targetEntity="Audit")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="audit_id", referencedColumnName="id")
+     * })
+     */
+    private $audit;
+
+    /**
+     * @var \Question
+     *
+     * @ORM\ManyToOne(targetEntity="Question")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="question_id", referencedColumnName="id")
+     * })
+     */
+    private $question;
+
+
+}
+

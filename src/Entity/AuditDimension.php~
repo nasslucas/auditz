@@ -1,0 +1,53 @@
+<?php
+
+namespace Cekurte\Audit\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * AuditDimension
+ *
+ * @ORM\Table(name="audit_dimension", uniqueConstraints={@ORM\UniqueConstraint(name="id_UNIQUE", columns={"id"})}, indexes={@ORM\Index(name="fk_audit_dimension_audit1_idx", columns={"audit_id"}), @ORM\Index(name="fk_audit_dimension_dimension1_idx", columns={"dimension_id"})})
+ * @ORM\Entity
+ */
+class AuditDimension
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="comment", type="text", length=65535, nullable=true)
+     */
+    private $comment;
+
+    /**
+     * @var \Audit
+     *
+     * @ORM\ManyToOne(targetEntity="Audit")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="audit_id", referencedColumnName="id")
+     * })
+     */
+    private $audit;
+
+    /**
+     * @var \Dimension
+     *
+     * @ORM\ManyToOne(targetEntity="Dimension")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="dimension_id", referencedColumnName="id")
+     * })
+     */
+    private $dimension;
+
+
+}
+

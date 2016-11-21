@@ -1,3 +1,14 @@
-node_modules/
+/vendor
+/build
+*.lock
+!composer.lock
+composer.phar
+.env
+.log
+.grunt/
 bower_components/
+node_modules/
 public/
+storage/logs/
+storage/cache/
+storage/doctrine/proxies/

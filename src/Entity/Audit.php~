@@ -1,0 +1,50 @@
+<?php
+
+namespace Cekurte\Audit\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Audit
+ *
+ * @ORM\Table(name="audit", uniqueConstraints={@ORM\UniqueConstraint(name="id_UNIQUE", columns={"id"})}, indexes={@ORM\Index(name="fk_audit_auditee1_idx", columns={"auditee_id"})})
+ * @ORM\Entity
+ */
+class Audit
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="created_at", type="datetime", nullable=false)
+     */
+    private $createdAt;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="finished_at", type="datetime", nullable=true)
+     */
+    private $finishedAt;
+
+    /**
+     * @var \Auditee
+     *
+     * @ORM\ManyToOne(targetEntity="Auditee")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="auditee_id", referencedColumnName="id")
+     * })
+     */
+    private $auditee;
+
+
+}
+
