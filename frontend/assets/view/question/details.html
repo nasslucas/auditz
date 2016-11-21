@@ -1,0 +1,31 @@
+<div class="container">
+	<div class="page-title">
+        <h1>Question #{{ vm.question.id }}</h1>
+	</div>
+    <div class="col-md-12">
+        <table class="table table-hover">
+            <tbody>
+                <tr>
+                    <th>ID</th>
+                    <td>{{ vm.question.id }}</td>
+                </tr>
+                <tr>
+                    <th>Title</th>
+                    <td>{{ vm.question.name }}</td>
+                </tr>
+                <tr>
+                    <th>Description</th>
+                    <td>{{ vm.question.description }}</td>
+                </tr>
+                <tr>
+                    <th>Dimension</th>
+                    <td>{{ vm.question.dimension.name }}</td>
+                </tr>
+                <tr ng-show="vm.question.child.name">
+                    <th>Question</th>
+                    <td>{{ vm.question.child.name }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

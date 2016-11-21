@@ -7,7 +7,7 @@
         'ngMessages',
         'ngToast',
         'rzModule',
-        'localytics.directives'
+        'selectize'
     ]);
 
 })();

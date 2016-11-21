@@ -6,37 +6,13 @@
         .factory('dimension', dimension);
 
     /* @ngInject */
-    function dimension($q) {
+    function dimension($http, BASE_URL) {
         return {
             all: function () {
-                var deferred = $q.defer();
-
-                deferred.resolve({
-                    data: [
-                        {
-                            id: 1,
-                            name: "Dimensão A",
-                        },
-                        {
-                            id: 2,
-                            name: "Dimensão B",
-                        },
-                        {
-                            id: 3,
-                            name: "Dimensão C",
-                        },
-                        {
-                            id: 4,
-                            name: "Dimensão D",
-                        },
-                        {
-                            id: 5,
-                            name: "Dimensão E",
-                        }
-                    ]
-                });
-
-                return deferred.promise;
+                return $http.get(BASE_URL + '/api/dimension');
+            },
+            create: function (dimension) {
+                return $http.post(BASE_URL + '/api/dimension', dimension);
             }
         };
     }

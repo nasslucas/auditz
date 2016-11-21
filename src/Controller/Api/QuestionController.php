@@ -62,11 +62,11 @@ class QuestionController extends AbstractController
         ]);
     }
 
-    public function saveAction(Request $request)
+    public function saveAction(Request $request, $id = null)
     {
         $data = json_decode($request->getContent(), true);
 
-        if (!isset($data['id']) && $request->isMethod(Request::METHOD_PUT)) {
+        if (!isset($id) && $request->isMethod(Request::METHOD_PUT)) {
             return new JsonResponse([
                 'The id field is required.'
             ], 400);
@@ -74,7 +74,7 @@ class QuestionController extends AbstractController
 
         $resource = $request->isMethod(Request::METHOD_POST)
             ? new Question()
-            : $this->getQuestionById($data['id'])
+            : $this->getQuestionById($id)
         ;
 
         if (isset($data['name'])) {

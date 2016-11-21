@@ -20,8 +20,20 @@
         });
 
         $routeProvider.when('/question/new/', {
-            templateUrl: 'assets/view/question/new.html',
-            controller: 'QuestionNewController',
+            templateUrl: 'assets/view/question/form.html',
+            controller: 'QuestionFormController',
+            controllerAs: 'vm'
+        });
+
+        $routeProvider.when('/question/show/:id/', {
+            templateUrl: 'assets/view/question/details.html',
+            controller: 'QuestionDetailsController',
+            controllerAs: 'vm'
+        });
+
+        $routeProvider.when('/question/edit/:id/', {
+            templateUrl: 'assets/view/question/form.html',
+            controller: 'QuestionFormController',
             controllerAs: 'vm'
         });
 

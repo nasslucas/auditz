@@ -6,51 +6,24 @@
         .factory('question', question);
 
     /* @ngInject */
-    function question($q) {
+    function question($http, BASE_URL) {
         return {
             all: function () {
-                var deferred = $q.defer();
+                return $http.get(BASE_URL + '/api/question');
+            },
+            get: function (id) {
+                return $http.get(BASE_URL + '/api/question/' + id);
+            },
+            save: function (question) {
+                if (typeof question.id === 'undefined') {
+                    return $http.post(BASE_URL + '/api/question', question);
+                } else {
+                    var id = question.id;
 
-                deferred.resolve({
-                    data: [
-                        {
-                            id: 1,
-                            dimension: 1,
-                            label: "Dimensão[1] - Mussum Ipsum, cacilds vidis litro abertis.",
-                            child: {
-                                id: 15,
-                                label: "Delegadis gente finis, bibendum egestas augue arcu ut est.",
-                            }
-                        },
-                        {
-                            id: 2,
-                            dimension: 2,
-                            label: "Dimensão[2] - Sapien in monti palavris qui num significa nadis i pareci latim.",
-                        },
-                        {
-                            id: 3,
-                            dimension: 3,
-                            label: "Dimensão[3] - Nec orci ornare consequat.",
-                        },
-                        {
-                            id: 4,
-                            dimension: 4,
-                            label: "Dimensão[4] - Praesent lacinia ultrices consectetur.",
-                        },
-                        {
-                            id: 5,
-                            dimension: 5,
-                            label: "Dimensão[5] - Sed non ipsum felis. Vehicula non.",
-                        },
-                        {
-                            id: 6,
-                            dimension: 1,
-                            label: "Dimensão[1] - Vivamus sit amet nibh non tellus tristique interdum.",
-                        }
-                    ]
-                });
+                    delete question.id;
 
-                return deferred.promise;
+                    return $http.put(BASE_URL + '/api/question/' + id, question);
+                }
             },
             lastAuditee: function (auditeeId) {
                 var deferred = $q.defer();

@@ -6,22 +6,18 @@
         .controller('QuestionController', QuestionController);
 
     /* @ngInject */
-    function QuestionController(question, dimension) {
+    function QuestionController($location, question, dimension) {
         var vm = this;
-        vm.title = 'Question';
-        vm.createDimension = createDimension;
 
-        dimension.all().then(function (response) {
-            vm.dimensions = response.data;
-        });
+        vm.new = function (event) {
+            event.stopPropagation();
+
+            $location.path('/question/new/');
+        };
 
         question.all().then(function (response) {
             vm.questions = response.data;
         });
-
-        function createDimension() {
-            console.log('createDimension');
-        }
     }
 
 })();

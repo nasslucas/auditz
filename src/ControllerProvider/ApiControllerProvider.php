@@ -54,7 +54,7 @@ class ApiControllerProvider implements ControllerProviderInterface
 
         $controllers->post('/question', 'api.question.controller:saveAction')->bind('api.question.create');
 
-        $controllers->put('/question', 'api.question.controller:saveAction')->bind('api.question.update');
+        $controllers->put('/question/{id}', 'api.question.controller:saveAction')->bind('api.question.update');
 
         $controllers->get('/audit', 'api.audit.controller:indexAction')->bind('api.audit');
 
