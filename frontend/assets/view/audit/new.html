@@ -1,8 +1,11 @@
 <div id="dashboard" class="container">
-	<div class="page-title">
+	<div class="col-xs-12 page-title">
 		<h1>Audit (new)</h1>
+        <a type="button" class="btn btn-default pull-right" href="#/audit/">
+            <i class="fa fa-th-list" aria-hidden="true"></i> List
+        </a>
 	</div>
-    <div class="col-md-12">
+    <div class="col-xs-12">
         <form class="form-horizontal">
             <div class="form-group" ng-class="{'has-error': !vm.audit.auditee}">
                 <label class="col-sm-2 control-label">Auditee:</label>
@@ -17,9 +20,10 @@
                     <div class="help-block" ng-show="!vm.audit.auditee">Required field.</div>
                 </div>
             </div>
+
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Questions</h3>
+                    <h3 class="panel-title">Questions ({{ vm.getNumberSelectedQuestions() }}/{{ vm.questions.length }} selected)</h3>
                     <div class="audit-filter">
                         <div class="pull-right">
                             <span>Filter by</span>
@@ -46,7 +50,7 @@
                         </thead>
                         <tbody>
                             <tr ng-repeat="question in vm.questions | filter: {dimension: {id: vm.filter}}">
-                                <td><input type="checkbox" ng-model="vm.audit.questions[question.id]" ng-value="question.id"></td>
+                                <td><input type="checkbox" ng-model="vm.audit.questions[question.id]"></td>
                                 <td>{{ question.id }}</td>
                                 <td>{{ question.name }}</td>
                                 <td>{{ question.dimension.name }}</td>
@@ -54,8 +58,6 @@
                             </tr>
                         </tbody>
                     </table>
-
-                    {{vm.audit.questions}}
                 </div>
             </div>
             <div class="form-group">

@@ -6,11 +6,12 @@
         .controller('AuditNewController', AuditNewController);
 
     /* @ngInject */
-    function AuditNewController($location, $routeParams, auditee, question, dimension) {
+    function AuditNewController($location, $routeParams, audit, auditee, question, dimension) {
         var vm = this;
 
         vm.createAudit = createAudit;
         vm.canSave = canSave;
+        vm.getNumberSelectedQuestions = getNumberSelectedQuestions;
 
         vm.audit = {
             auditee:   null,
@@ -78,15 +79,32 @@
         function createAudit(event) {
             event.stopPropagation();
 
-            for (var index in vm.audit.questions) {
-                if (vm.audit.questions[index] === false) {
-                    delete vm.audit.questions[index];
+            var data = {
+                auditee_id: parseInt(vm.audit.auditee),
+                questions:  []
+            };
+
+            for (var questionId in vm.audit.questions) {
+                if (vm.audit.questions[questionId] === false) {
+                    delete vm.audit.questions[questionId];
+                    continue;
                 }
+
+                data.questions.push({
+                    id: parseInt(questionId)
+                });
             }
 
-            console.info(vm.audit);
-
-            console.info('createAudit');
+            audit.create(data).then(function (response) {
+                $location.path('/audit/');
+            }, function (response) {
+                swal({
+                    title: "Oops...",
+                    text: "Something went wrong on save a new audit!",
+                    type: "error",
+                    confirmButtonText: "Close"
+                });
+            });
         }
 
         function canSave() {
@@ -105,6 +123,22 @@
             }
 
             return false;
+        }
+
+        function getNumberSelectedQuestions() {
+            if (typeof vm.audit.questions === null) {
+                return 0;
+            }
+
+            var count = 0;
+
+            for (var id in vm.audit.questions) {
+                if (vm.audit.questions[id]) {
+                    count++;
+                }
+            }
+
+            return count;
         }
     }
 

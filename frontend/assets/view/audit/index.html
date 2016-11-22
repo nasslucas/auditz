@@ -1,27 +1,31 @@
 <div class="container">
-    <div class="page-title">
+    <div class="col-xs-12 page-title">
         <h1>Audit</h1>
-        <button type="button" class="btn btn-success" ng-click="vm.new($event)">
-            <i class="fa fa-plus" aria-hidden="true"></i> Novo
-        </button>
+        <a type="button" class="btn btn-success pull-right" href="#/audit/new/">
+            <i class="fa fa-plus" aria-hidden="true"></i> New
+        </a>
     </div>
-    <div class="col-md-12">
+    <div class="col-xs-12">
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th>#ID</th>
+                    <th>#Hash</th>
+                    <th>Auditee</th>
                     <th>Created at</th>
                     <th>Status</th>
-                    <th>Actions</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="audit in vm.audits track by audit.id">
-                    <td>{{ audit.id }}</td>
+                    <td>{{ audit.hash }}</td>
+                    <td>{{ audit.auditee.name }}</td>
                     <td>{{ audit.created_at | date:'medium' }}</td>
                     <td>{{ audit.finished_at ? 'Finished' : 'Open' }}</td>
                     <td>
-
+                        <a type="button" class="btn btn-sm btn-default pull-right" href="#/audit/{{ audit.hash }}">
+                            <i class="fa fa-info-circle" aria-hidden="true"></i> Continue
+                        </a>
                     </td>
                 </tr>
             </tbody>

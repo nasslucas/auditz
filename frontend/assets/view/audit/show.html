@@ -1,0 +1,57 @@
+<div id="dashboard" class="container">
+	<div class="col-xs-12 page-title">
+		<h1>Audit ({{ vm.audit.auditee.name }}) <small>#{{ vm.audit.hash }}</small></h1>
+	</div>
+    <div class="col-xs-12">
+        <ul class="nav nav-tabs">
+            <li ng-class="{'active': vm.tab.dimension == item.dimension.id}" ng-repeat="item in vm.audit.dimensions"><a ng-click="vm.changeDimension(item.dimension.id)">{{ item.dimension.name }}</a></li>
+        </ul>
+        <form name="formName">
+            <div ng-repeat="item in vm.audit.questions | filter:{question: {dimension: {id: vm.tab.dimension}}}">
+                <div class="form-group col-md-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <label class="panel-title">{{ item.question.name }}</label>
+                        </div>
+                        <div class="panel-body">
+                            <p>{{ item.question.description }}</p>
+                            <rzslider
+                                id="question-{{item.question.id}}"
+                                rz-slider-model="vm[item.question.id]"
+                                rz-slider-options="vm.sliderOptions"
+                            ></rzslider>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6" ng-show="item.question.child && vm[item.question.id] >= 1">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <label class="panel-title">{{ item.question.child.name }}</label>
+                        </div>
+                        <div class="panel-body">
+                            <p>{{ item.question.child.description }}</p>
+                            <rzslider
+                                id="question-child-{{item.question.id}}"
+                                ng-init="vm[item.question.child.id] = 0"
+                                rz-slider-model="vm[item.question.child.id]"
+                                rz-slider-options="vm.sliderOptions"
+                            ></rzslider>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12" ng-show="vm.tab.dimension == item.dimension.id" ng-repeat="item in vm.audit.dimensions">
+                <div class="panel panel-danger">
+                    <div class="panel-heading">
+                        <label class="panel-title">Comentários</label>
+                    </div>
+                    <div class="panel-body">
+                        <textarea class="form-control" rows="8"></textarea>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

@@ -144,18 +144,26 @@ class AuditController extends AbstractController
         try {
             $this->getResourceManager()->writeResource($resource);
 
+            $questionDimensions = [];
+
             foreach ($data['questions'] as $item) {
+                $currentQuestion = $this->getQuestionById($item['id']);
+
                 $auditQuestion = new AuditQuestion();
                 $auditQuestion->setAudit($resource);
-                $auditQuestion->setQuestion($this->getQuestionById($item['id']));
+                $auditQuestion->setQuestion($currentQuestion);
 
                 $this->getAuditQuestionResourceManager()->writeResource($auditQuestion);
+
+                $questionDimensions[$currentQuestion->getDimension()->getId()] = $currentQuestion->getDimension();
             }
 
-            foreach ($data['dimensions'] as $item) {
+            $questionDimensions = array_values($questionDimensions);
+
+            foreach ($questionDimensions as $dimension) {
                 $auditDimension = new AuditDimension();
                 $auditDimension->setAudit($resource);
-                $auditDimension->setDimension($this->getDimensionById($item['id']));
+                $auditDimension->setDimension($dimension);
 
                 $this->getAuditDimensionResourceManager()->writeResource($auditDimension);
             }

@@ -11,6 +11,9 @@
             all: function () {
                 return $http.get(BASE_URL + '/api/audit');
             },
+            get: function (hash) {
+                return $http.get(BASE_URL + '/api/audit/' + hash);
+            },
             create: function (audit) {
                 return $http.post(BASE_URL + '/api/audit', audit);
             }

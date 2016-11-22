@@ -7,12 +7,6 @@
 
     /* @ngInject */
     function routeConfig($routeProvider, $httpProvider) {
-        $routeProvider.when('/', {
-            templateUrl: 'assets/view/dashboard.html',
-            controller: 'DashboardController',
-            controllerAs: 'vm'
-        });
-
         $routeProvider.when('/audit/', {
             templateUrl: 'assets/view/audit/index.html',
             controller: 'AuditController',
@@ -22,6 +16,12 @@
         $routeProvider.when('/audit/new/', {
             templateUrl: 'assets/view/audit/new.html',
             controller: 'AuditNewController',
+            controllerAs: 'vm'
+        });
+
+        $routeProvider.when('/audit/:hash/', {
+            templateUrl: 'assets/view/audit/show.html',
+            controller: 'AuditShowController',
             controllerAs: 'vm'
         });
 
@@ -49,7 +49,7 @@
             controllerAs: 'vm'
         });
 
-        $routeProvider.otherwise('/');
+        $routeProvider.otherwise('/audit/');
     }
 
 })();

@@ -1,11 +1,22 @@
 <div class="container">
-	<div class="page-title">
+	<div class="col-xs-12 page-title">
         <h1>Question</h1>
-        <button type="button" class="btn btn-success" ng-click="vm.new($event)">
-            <i class="fa fa-plus" aria-hidden="true"></i> Novo
-        </button>
+        <a type="button" class="btn btn-success pull-right" href="#/question/new/">
+            <i class="fa fa-plus" aria-hidden="true"></i> New
+        </a>
 	</div>
-    <div class="col-md-12">
+    <div class="col-xs-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">Search</div>
+            <div class="panel-body">
+                <div class="col-xs-6">
+                    <input type="text" class="form-control" ng-model="vm.filter.name" placeholder="Title">
+                </div>
+                <div class="col-xs-6">
+                    <input type="text" class="form-control" ng-model="vm.filter.dimension" placeholder="Dimension">
+                </div>
+            </div>
+        </div>
         <table class="table table-hover">
             <thead>
                 <tr>
@@ -13,17 +24,19 @@
                     <th>Title</th>
                     <th>Dimension</th>
                     <th>Has child</th>
-                    <th>Actions</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="question in vm.questions track by question.id">
+                <tr ng-repeat="question in vm.questions | filter:{archived: false, name: vm.filter.name, dimension: {name: vm.filter.dimension}}">
                     <td>{{ question.id }}</td>
                     <td>{{ question.name }}</td>
                     <td>{{ question.dimension.name }}</td>
                     <td>{{ question.child ? 'Yes' : 'No' }}</td>
                     <td>
-
+                        <a type="button" class="btn btn-sm btn-primary pull-right" href="#/question/show/{{ question.id }}">
+                            <i class="fa fa-info-circle" aria-hidden="true"></i> Show
+                        </a>
                     </td>
                 </tr>
             </tbody>
