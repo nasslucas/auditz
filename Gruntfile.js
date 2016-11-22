@@ -79,6 +79,7 @@ module.exports = function(grunt) {
                     '<%= bower_path %>/angularjs-slider/dist/rzslider.min.js',
                     '<%= bower_path %>/selectize/dist/js/standalone/selectize.min.js',
                     '<%= bower_path %>/angular-selectize2/dist/angular-selectize.js',
+                    '<%= bower_path %>/moment/min/moment.min.js',
                 ],
                 dest: '<%= dist_path %>/<%= js_relative_path %>/vendor.js'
             },

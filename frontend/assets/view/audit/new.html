@@ -1,0 +1,75 @@
+<div id="dashboard" class="container">
+	<div class="page-title">
+		<h1>Audit (new)</h1>
+	</div>
+    <div class="col-md-12">
+        <form class="form-horizontal">
+            <div class="form-group" ng-class="{'has-error': !vm.audit.auditee}">
+                <label class="col-sm-2 control-label">Auditee:</label>
+                <div class="col-sm-10">
+                    <selectize
+                      tabindex="1"
+                      config="vm.auditeesConfig"
+                      options="vm.auditees"
+                      ng-model="vm.audit.auditee"
+                      required="true">
+                    </selectize>
+                    <div class="help-block" ng-show="!vm.audit.auditee">Required field.</div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Questions</h3>
+                    <div class="audit-filter">
+                        <div class="pull-right">
+                            <span>Filter by</span>
+                            <selectize
+                              tabindex="2"
+                              config="vm.dimensionsConfig"
+                              options="vm.dimensions"
+                              ng-model="vm.filter">
+                            </selectize>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>#ID</th>
+                                <th>Title</th>
+                                <th>Dimension</th>
+                                <th>Has child</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="question in vm.questions | filter: {dimension: {id: vm.filter}}">
+                                <td><input type="checkbox" ng-model="vm.audit.questions[question.id]" ng-value="question.id"></td>
+                                <td>{{ question.id }}</td>
+                                <td>{{ question.name }}</td>
+                                <td>{{ question.dimension.name }}</td>
+                                <td>{{ question.child ? 'Yes' : 'No' }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    {{vm.audit.questions}}
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button
+                        type="button"
+                        class="btn pull-right"
+                        ng-class="{'btn-success': vm.canSave()}"
+                        ng-disabled="!vm.canSave()"
+                        ng-click="vm.canSave() && vm.createAudit($event)">
+                        <i class="fa fa-floppy-o" aria-hidden="true"></i> Salvar
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

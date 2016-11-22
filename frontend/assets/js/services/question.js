@@ -24,31 +24,6 @@
 
                     return $http.put(BASE_URL + '/api/question/' + id, question);
                 }
-            },
-            lastAuditee: function (auditeeId) {
-                var deferred = $q.defer();
-
-                deferred.resolve({
-                    data: [
-                        {
-                            id: 1,
-                            label: "First label",
-                            value: 6,
-                            child: {
-                                id: 3,
-                                label: "Third label (parent #1)",
-                                value: 3
-                            }
-                        },
-                        {
-                            id: 2,
-                            label: "Second label",
-                            value: 5
-                        }
-                    ]
-                });
-
-                return deferred.promise;
             }
         };
     }

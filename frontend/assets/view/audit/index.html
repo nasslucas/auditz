@@ -1,0 +1,30 @@
+<div class="container">
+    <div class="page-title">
+        <h1>Audit</h1>
+        <button type="button" class="btn btn-success" ng-click="vm.new($event)">
+            <i class="fa fa-plus" aria-hidden="true"></i> Novo
+        </button>
+    </div>
+    <div class="col-md-12">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>#ID</th>
+                    <th>Created at</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="audit in vm.audits track by audit.id">
+                    <td>{{ audit.id }}</td>
+                    <td>{{ audit.created_at | date:'medium' }}</td>
+                    <td>{{ audit.finished_at ? 'Finished' : 'Open' }}</td>
+                    <td>
+
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

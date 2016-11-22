@@ -13,6 +13,18 @@
             controllerAs: 'vm'
         });
 
+        $routeProvider.when('/audit/', {
+            templateUrl: 'assets/view/audit/index.html',
+            controller: 'AuditController',
+            controllerAs: 'vm'
+        });
+
+        $routeProvider.when('/audit/new/', {
+            templateUrl: 'assets/view/audit/new.html',
+            controller: 'AuditNewController',
+            controllerAs: 'vm'
+        });
+
         $routeProvider.when('/question/', {
             templateUrl: 'assets/view/question/index.html',
             controller: 'QuestionController',
