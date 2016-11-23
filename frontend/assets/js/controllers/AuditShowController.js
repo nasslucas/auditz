@@ -6,21 +6,13 @@
         .controller('AuditShowController', AuditShowController);
 
     /* @ngInject */
-    function AuditShowController($routeParams, $timeout, audit) {
+    function AuditShowController($location, $routeParams, $timeout, audit) {
         var vm = this;
         vm.changeDimension = changeDimension;
-        vm.sliderOptions = sliderOptions();
-
-        vm.autoSave = (function () {
-            console.info('anon');
-            var promise = null;
-
-            return function(callback, ms) {
-                console.info('call');
-                $timeout.cancel(promise);         // clearTimeout(timer);
-                promise = $timeout(callback, ms); // timer = setTimeout(callback, ms);
-            };
-        })();
+        vm.buildCustomOptions = buildCustomOptions;
+        vm.saveComment = saveComment;
+        vm.canFinish = canFinish;
+        vm.finish = finish;
 
         audit.get($routeParams.hash).then(function (response) {
             vm.audit = response.data;
@@ -37,27 +29,81 @@
             });
         });
 
-        vm.autoSave(function () {
-            console.info(new Date());
-        }, 2);
-
-        function sliderOptions() {
+        function buildCustomOptions(auditHash, questionId) {
             return {
-                onEnd: function (sliderId, modelValue, highValue, pointerType) {
-                    console.info('onEnd');
-                    console.info(sliderId);
-                    console.info(modelValue);
-                    console.info(highValue);
-                    console.info(pointerType);
+                id: 'audit' + auditHash + '_question' + questionId,
+                onEnd: function(sliderId, modelValue) {
+                    var data = {
+                        questions: [
+                            {
+                                id: questionId,
+                                answer: modelValue
+                            }
+                        ]
+                    };
+
+                    audit.update(auditHash, data).then(function (response) {
+                        vm.notification = {
+                            type: 'success',
+                            time: new Date(),
+                            message: 'Answer saved with successfully!'
+                        };
+                    }, function (response) {
+                        vm.notification = {
+                            type: 'error',
+                            time: new Date(),
+                            message: 'Occur a problem to save the answer of question ' + questionId + '.'
+                        };
+                    });
                 }
             };
         }
 
+        function saveComment(auditHash, dimensionId, comment) {
+            var data = {
+                dimensions: [
+                    {
+                        id: dimensionId,
+                        comment: comment
+                    }
+                ]
+            };
 
+            audit.update(auditHash, data).then(function (response) {
+                vm.notification = {
+                    type: 'success',
+                    time: new Date(),
+                    message: 'Comment saved with successfully!'
+                };
+            }, function (response) {
+                vm.notification = {
+                    type: 'error',
+                    time: new Date(),
+                    message: 'Occur a problem to save the comment ' + dimensionId + '.'
+                };
+            });
+        }
 
+        function canFinish() {
+            return true;
+        }
 
+        function finish(auditHash, event) {
+            event.stopPropagation();
 
+            audit.finish(vm.audit.hash).then(function (response) {
+                $location.path('/audit/');
+            }, function (response) {
+                swal({
+                    title: "Oops...",
+                    text: "Something went wrong on finish this audit!",
+                    type: "error",
+                    confirmButtonText: "Close"
+                });
+            });
 
+            console.info(vm);
+        }
 
         // dimension.all().then(function (response) {
         //     vm.dimensions = response.data;

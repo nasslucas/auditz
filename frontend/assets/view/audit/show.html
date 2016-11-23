@@ -1,6 +1,15 @@
 <div id="dashboard" class="container">
 	<div class="col-xs-12 page-title">
 		<h1>Audit ({{ vm.audit.auditee.name }}) <small>#{{ vm.audit.hash }}</small></h1>
+        <a type="button" class="btn btn-default pull-right" ng-click="vm.canFinish() && vm.finish(vm.audit.hash, $event)" ng-disabled="!vm.canFinish()">
+            <i class="fa fa-floppy-o" aria-hidden="true"></i> Finish it
+        </a>
+        <p
+            ng-show="vm.notification"
+            class="notification"
+            ng-class="{'notification-success': vm.notification.type === 'success', 'notification-error': vm.notification.type !== 'success'}">
+            {{ vm.notification.time | date:'medium' }} - {{ vm.notification.message }}
+        </p>
 	</div>
     <div class="col-xs-12">
         <ul class="nav nav-tabs">
@@ -18,7 +27,7 @@
                             <rzslider
                                 id="question-{{item.question.id}}"
                                 rz-slider-model="vm[item.question.id]"
-                                rz-slider-options="vm.sliderOptions"
+                                rz-slider-options="vm.buildCustomOptions(vm.audit.hash, item.question.id)"
                             ></rzslider>
                         </div>
                     </div>
@@ -35,7 +44,7 @@
                                 id="question-child-{{item.question.id}}"
                                 ng-init="vm[item.question.child.id] = 0"
                                 rz-slider-model="vm[item.question.child.id]"
-                                rz-slider-options="vm.sliderOptions"
+                                rz-slider-options="vm.buildCustomOptions(vm.audit.hash, item.question.child.id)"
                             ></rzslider>
                         </div>
                     </div>
@@ -45,10 +54,16 @@
             <div class="col-md-12" ng-show="vm.tab.dimension == item.dimension.id" ng-repeat="item in vm.audit.dimensions">
                 <div class="panel panel-danger">
                     <div class="panel-heading">
-                        <label class="panel-title">Comentários</label>
+                        <label class="panel-title">Comment</label>
                     </div>
                     <div class="panel-body">
-                        <textarea class="form-control" rows="8"></textarea>
+                        <textarea
+                            class="form-control"
+                            ng-model="vm.comment"
+                            ng-model-options="{debounce: 5000}"
+                            ng-change="vm.saveComment(vm.audit.hash, item.dimension.id, vm.comment)"
+                            rows="8">
+                        </textarea>
                     </div>
                 </div>
             </div>

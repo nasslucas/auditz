@@ -16,6 +16,12 @@
             },
             create: function (audit) {
                 return $http.post(BASE_URL + '/api/audit', audit);
+            },
+            update: function (hash, data) {
+                return $http.put(BASE_URL + '/api/audit/' + hash, data);
+            },
+            finish: function (hash) {
+                return $http.put(BASE_URL + '/api/audit/' + hash + '/finish');
             }
         };
     }
