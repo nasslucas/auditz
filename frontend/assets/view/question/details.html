@@ -32,9 +32,9 @@
                     <th>Dimension</th>
                     <td>{{ vm.question.dimension.name }}</td>
                 </tr>
-                <tr ng-show="vm.question.child.name">
+                <tr ng-show="vm.question.parent.name">
                     <th>Question</th>
-                    <td>{{ vm.question.child.name }}</td>
+                    <td>{{ vm.question.parent.name }}</td>
                 </tr>
             </tbody>
         </table>

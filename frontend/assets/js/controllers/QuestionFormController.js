@@ -26,8 +26,8 @@
                         dimension: response.data.dimension.id
                     };
 
-                    if (typeof response.data.child !== 'undefined') {
-                        vm.question.question = response.data.child.id;
+                    if (typeof response.data.parent !== 'undefined') {
+                        vm.question.question = response.data.parent.id;
                     }
                 });
             }

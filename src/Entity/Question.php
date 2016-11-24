@@ -62,7 +62,7 @@ class Question implements ResourceInterface
      *   @ORM\JoinColumn(name="question_id", referencedColumnName="id", nullable=true)
      * })
      *
-     * @JMS\SerializedName("child")
+     * @JMS\SerializedName("parent")
      */
     private $question;
 
@@ -196,5 +196,15 @@ class Question implements ResourceInterface
     public function getQuestion()
     {
         return $this->question;
+    }
+
+    /**
+     * Has question
+     *
+     * @return boolean
+     */
+    public function hasQuestion()
+    {
+        return !empty($this->question);
     }
 }

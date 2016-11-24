@@ -23,7 +23,7 @@
                     <th>#ID</th>
                     <th>Title</th>
                     <th>Dimension</th>
-                    <th>Has child</th>
+                    <th>Has parent</th>
                     <th></th>
                 </tr>
             </thead>
@@ -32,7 +32,7 @@
                     <td>{{ question.id }}</td>
                     <td>{{ question.name }}</td>
                     <td>{{ question.dimension.name }}</td>
-                    <td>{{ question.child ? 'Yes' : 'No' }}</td>
+                    <td>{{ question.parent ? 'Yes' : 'No' }}</td>
                     <td>
                         <a type="button" class="btn btn-sm btn-primary pull-right" href="#/question/show/{{ question.id }}">
                             <i class="fa fa-info-circle" aria-hidden="true"></i> Show

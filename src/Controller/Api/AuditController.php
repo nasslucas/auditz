@@ -8,6 +8,7 @@ use Cekurte\Audit\Entity\AuditDimension;
 use Cekurte\Audit\Entity\AuditQuestion;
 use Cekurte\Audit\Exception\ValidationException;
 use Cekurte\Audit\Response\ConstraintViolationResponse;
+use Cekurte\ResourceManager\Exception\ResourceDataNotFoundException;
 use Cekurte\ResourceManager\Exception\ResourceManagerRefusedWriteException;
 use Cekurte\ResourceManager\ResourceManager;
 use Cekurte\Resource\Query\Language\ExprQueue;
@@ -148,6 +149,20 @@ class AuditController extends AbstractController
 
             foreach ($data['questions'] as $item) {
                 $currentQuestion = $this->getQuestionById($item['id']);
+
+                if ($currentQuestion->hasQuestion()) {
+                    $parentQuestion = $currentQuestion->getQuestion();
+
+                    try {
+                        $this->getAuditQuestionBy($resource->getId(), $parentQuestion->getId());
+                    } catch (ResourceDataNotFoundException $e) {
+                        $auditParentQuestion = new AuditQuestion();
+                        $auditParentQuestion->setAudit($resource);
+                        $auditParentQuestion->setQuestion($parentQuestion);
+
+                        $this->getAuditQuestionResourceManager()->writeResource($auditParentQuestion);
+                    }
+                }
 
                 $auditQuestion = new AuditQuestion();
                 $auditQuestion->setAudit($resource);

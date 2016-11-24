@@ -17,8 +17,23 @@
         </ul>
         <form name="formName">
             <div ng-repeat="item in vm.audit.questions | filter:{question: {dimension: {id: vm.tab.dimension}}}">
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-6" ng-show="item.question.parent">
                     <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <label class="panel-title">{{ item.question.parent.name }}</label>
+                        </div>
+                        <div class="panel-body">
+                            <p>{{ item.question.parent.description }}</p>
+                            <rzslider
+                                rz-slider-model="vm.audit.questions[item.question.parent.id].answer"
+                                rz-slider-options="vm.buildCustomOptions(vm.audit.hash, item.question.parent.id)"
+                            ></rzslider>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6" ng-show="vm.audit.questions[item.question.parent.id].answer >= 1">
+                    <div class="panel panel-primary">
                         <div class="panel-heading">
                             <label class="panel-title">{{ item.question.name }}</label>
                         </div>
@@ -27,21 +42,6 @@
                             <rzslider
                                 rz-slider-model="vm.audit.questions[item.question.id].answer"
                                 rz-slider-options="vm.buildCustomOptions(vm.audit.hash, item.question.id)"
-                            ></rzslider>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group col-md-6" ng-show="item.question.child && vm.audit.questions[item.question.id].answer >= 1">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <label class="panel-title">{{ item.question.child.name }}</label>
-                        </div>
-                        <div class="panel-body">
-                            <p>{{ item.question.child.description }}</p>
-                            <rzslider
-                                rz-slider-model="vm.audit.questions[item.question.child.id].answer"
-                                rz-slider-options="vm.buildCustomOptions(vm.audit.hash, item.question.child.id)"
                             ></rzslider>
                         </div>
                     </div>

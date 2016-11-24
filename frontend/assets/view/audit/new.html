@@ -45,7 +45,7 @@
                                 <th>#ID</th>
                                 <th>Title</th>
                                 <th>Dimension</th>
-                                <th>Has child</th>
+                                <th>Has parent</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -54,7 +54,7 @@
                                 <td>{{ question.id }}</td>
                                 <td>{{ question.name }}</td>
                                 <td>{{ question.dimension.name }}</td>
-                                <td>{{ question.child ? 'Yes' : 'No' }}</td>
+                                <td>{{ question.parent ? 'Yes' : 'No' }}</td>
                             </tr>
                         </tbody>
                     </table>
