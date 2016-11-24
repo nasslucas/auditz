@@ -101,35 +101,7 @@
                     confirmButtonText: "Close"
                 });
             });
-
-            console.info(vm);
         }
-
-        // dimension.all().then(function (response) {
-        //     vm.dimensions = response.data;
-
-        //     if (typeof vm.dimensions[0] !== 'undefined') {
-        //         vm.dimension = vm.dimensions[0];
-        //     }
-        // });
-
-        // question.all().then(function (response) {
-        //     var questions = response.data;
-
-        //     questions.sort(function (current, next) {
-        //         if (current.id > next.id) {
-        //             return 1;
-        //         }
-
-        //         if (current.id < next.id) {
-        //             return -1;
-        //         }
-
-        //         return 0;
-        //     });
-
-        //     vm.questions = questions;
-        // });
 
         function changeDimension(newDimensionId) {
             vm.tab.dimension = newDimensionId;

@@ -23,7 +23,7 @@
                     <td>{{ audit.created_at | date:'medium' }}</td>
                     <td>{{ audit.finished_at ? 'Finished' : 'Open' }}</td>
                     <td>
-                        <a type="button" class="btn btn-sm btn-default pull-right" href="#/audit/{{ audit.hash }}">
+                        <a type="button" class="btn btn-sm btn-default pull-right" href="#/audit/{{ audit.hash }}" ng-hide="audit.finished_at">
                             <i class="fa fa-info-circle" aria-hidden="true"></i> Continue
                         </a>
                     </td>

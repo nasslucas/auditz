@@ -25,15 +25,14 @@
                         <div class="panel-body">
                             <p>{{ item.question.description }}</p>
                             <rzslider
-                                id="question-{{item.question.id}}"
-                                rz-slider-model="vm[item.question.id]"
+                                rz-slider-model="vm.audit.questions[item.question.id].answer"
                                 rz-slider-options="vm.buildCustomOptions(vm.audit.hash, item.question.id)"
                             ></rzslider>
                         </div>
                     </div>
                 </div>
 
-                <div class="form-group col-md-6" ng-show="item.question.child && vm[item.question.id] >= 1">
+                <div class="form-group col-md-6" ng-show="item.question.child && vm.audit.questions[item.question.id].answer >= 1">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
                             <label class="panel-title">{{ item.question.child.name }}</label>
@@ -41,9 +40,7 @@
                         <div class="panel-body">
                             <p>{{ item.question.child.description }}</p>
                             <rzslider
-                                id="question-child-{{item.question.id}}"
-                                ng-init="vm[item.question.child.id] = 0"
-                                rz-slider-model="vm[item.question.child.id]"
+                                rz-slider-model="vm.audit.questions[item.question.child.id].answer"
                                 rz-slider-options="vm.buildCustomOptions(vm.audit.hash, item.question.child.id)"
                             ></rzslider>
                         </div>
@@ -59,9 +56,9 @@
                     <div class="panel-body">
                         <textarea
                             class="form-control"
-                            ng-model="vm.comment"
+                            ng-model="vm.audit.dimensions[$index].comment"
                             ng-model-options="{debounce: 5000}"
-                            ng-change="vm.saveComment(vm.audit.hash, item.dimension.id, vm.comment)"
+                            ng-change="vm.saveComment(vm.audit.hash, item.dimension.id, vm.audit.dimensions[$index].comment)"
                             rows="8">
                         </textarea>
                     </div>

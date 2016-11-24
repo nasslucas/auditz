@@ -220,14 +220,6 @@ class AuditController extends AbstractController
                 throw new ValidationException('This audit already was finished.');
             }
 
-            $auditQuestion = $resource->getQuestions();
-
-            foreach ($auditQuestion as $item) {
-                if (!$item->hasAnswer()) {
-                    throw new ValidationException('Answers are not filled.');
-                }
-            }
-
             $resource->setFinishedAt(new \DateTime('NOW'));
 
             $this->getResourceManager()->writeResource($resource);
