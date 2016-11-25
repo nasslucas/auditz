@@ -108,11 +108,15 @@
         }
 
         function canSave() {
-            if (typeof vm.audit.auditee === null) {
+            if (typeof vm.audit.auditee === 'undefined') {
                 return false;
             }
 
-            if (typeof vm.audit.questions === null) {
+            if (vm.audit.auditee === null) {
+                return false;
+            }
+
+            if (vm.audit.questions === null) {
                 return false;
             }
 
