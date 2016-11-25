@@ -16,17 +16,17 @@
             <li ng-class="{'active': vm.tab.dimension == item.dimension.id}" ng-repeat="item in vm.audit.dimensions"><a ng-click="vm.changeDimension(item.dimension.id)">{{ item.dimension.name }}</a></li>
         </ul>
         <form name="formName">
-            <div ng-repeat="item in vm.audit.questions | filter:{question: {dimension: {id: vm.tab.dimension}}}">
-                <div class="form-group col-md-6" ng-show="item.question.parent">
+            <div ng-repeat="(questionId, item) in vm.audit.questions | objectFilter:vm.tab.dimension">
+                <div class="form-group col-md-6" ng-hide="item.question.parent">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <label class="panel-title">{{ item.question.parent.name }}</label>
+                            <label class="panel-title">{{ item.question.name }}</label>
                         </div>
                         <div class="panel-body">
-                            <p>{{ item.question.parent.description }}</p>
+                            <p>{{ item.question.description }}</p>
                             <rzslider
-                                rz-slider-model="vm.audit.questions[item.question.parent.id].answer"
-                                rz-slider-options="vm.buildCustomOptions(vm.audit.hash, item.question.parent.id)"
+                                rz-slider-model="vm.audit.questions[questionId].answer"
+                                rz-slider-options="vm.buildCustomOptions(vm.audit.hash, questionId)"
                             ></rzslider>
                         </div>
                     </div>
@@ -40,8 +40,8 @@
                         <div class="panel-body">
                             <p>{{ item.question.description }}</p>
                             <rzslider
-                                rz-slider-model="vm.audit.questions[item.question.id].answer"
-                                rz-slider-options="vm.buildCustomOptions(vm.audit.hash, item.question.id)"
+                                rz-slider-model="vm.audit.questions[questionId].answer"
+                                rz-slider-options="vm.buildCustomOptions(vm.audit.hash, questionId)"
                             ></rzslider>
                         </div>
                     </div>
