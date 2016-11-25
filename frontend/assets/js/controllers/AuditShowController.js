@@ -15,10 +15,25 @@
         vm.finish = finish;
 
         audit.get($routeParams.hash).then(function (response) {
-            vm.audit = response.data;
+            var filterAuditQuestions = function (data) {
+                var auditQuestions = {};
+
+                for (var index in data.questions) {
+                    var auditQuestion = data.questions[index];
+                    var question = auditQuestion.question;
+
+                    auditQuestions[auditQuestion.question.id] = auditQuestion;
+                }
+
+                data.questions = auditQuestions;
+
+                return data;
+            };
+
+            vm.audit = filterAuditQuestions(response.data);
 
             vm.tab = {
-                dimension: vm.audit.questions[0].question.dimension.id
+                dimension: vm.audit.dimensions[0].dimension.id
             };
         }, function (response) {
             swal({
@@ -31,7 +46,6 @@
 
         function buildCustomOptions(auditHash, questionId) {
             return {
-                id: 'audit' + auditHash + '_question' + questionId,
                 onEnd: function(sliderId, modelValue) {
                     var data = {
                         questions: [
