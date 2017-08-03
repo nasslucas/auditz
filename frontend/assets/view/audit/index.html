@@ -1,7 +1,7 @@
 <div class="container">
     <div class="col-xs-12 page-title">
         <h1>Audit</h1>
-        <a type="button" class="btn btn-success pull-right" href="#/audit/new/">
+        <a type="button" class="btn btn-success pull-right" href="#!audit/new/">
             <i class="fa fa-plus" aria-hidden="true"></i> New
         </a>
     </div>
@@ -23,7 +23,7 @@
                     <td>{{ audit.created_at | date:'medium' }}</td>
                     <td>{{ audit.finished_at ? 'Finished' : 'Open' }}</td>
                     <td>
-                        <a type="button" class="btn btn-sm btn-default pull-right" href="#/audit/{{ audit.hash }}" ng-hide="audit.finished_at">
+                        <a type="button" class="btn btn-sm btn-default pull-right" href="#!audit/{{ audit.hash }}" ng-hide="audit.finished_at">
                             <i class="fa fa-info-circle" aria-hidden="true"></i> Continue
                         </a>
                     </td>
